@@ -71,6 +71,42 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugL"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3df409a-530f-4ca7-a8e2-5d49f3946c80"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugR"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8e20a5d-9d70-4573-8c52-01106b24bd31"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugD"",
+                    ""type"": ""Button"",
+                    ""id"": ""e654ad78-0cec-434f-b927-f9279cd8dd50"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugU"",
+                    ""type"": ""Button"",
+                    ""id"": ""7036f78a-efc2-46dd-9e91-4cbe34f98cbe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -128,6 +164,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""AltitudeDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cf63aba-d3a5-4b0c-a861-7bc63504137c"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f930402-204b-4495-8bb0-98f196bb3c2b"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35c7b9ed-4199-44b2-bb3f-5ee634a7ab39"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9723d3dc-a7af-49e0-b362-facf40ffe564"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugU"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -141,6 +221,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_CameraLook = m_Gameplay.FindAction("CameraLook", throwIfNotFound: true);
         m_Gameplay_AltitudeUp = m_Gameplay.FindAction("AltitudeUp", throwIfNotFound: true);
         m_Gameplay_AltitudeDown = m_Gameplay.FindAction("AltitudeDown", throwIfNotFound: true);
+        m_Gameplay_DebugL = m_Gameplay.FindAction("DebugL", throwIfNotFound: true);
+        m_Gameplay_DebugR = m_Gameplay.FindAction("DebugR", throwIfNotFound: true);
+        m_Gameplay_DebugD = m_Gameplay.FindAction("DebugD", throwIfNotFound: true);
+        m_Gameplay_DebugU = m_Gameplay.FindAction("DebugU", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +289,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_CameraLook;
     private readonly InputAction m_Gameplay_AltitudeUp;
     private readonly InputAction m_Gameplay_AltitudeDown;
+    private readonly InputAction m_Gameplay_DebugL;
+    private readonly InputAction m_Gameplay_DebugR;
+    private readonly InputAction m_Gameplay_DebugD;
+    private readonly InputAction m_Gameplay_DebugU;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -214,6 +302,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @CameraLook => m_Wrapper.m_Gameplay_CameraLook;
         public InputAction @AltitudeUp => m_Wrapper.m_Gameplay_AltitudeUp;
         public InputAction @AltitudeDown => m_Wrapper.m_Gameplay_AltitudeDown;
+        public InputAction @DebugL => m_Wrapper.m_Gameplay_DebugL;
+        public InputAction @DebugR => m_Wrapper.m_Gameplay_DebugR;
+        public InputAction @DebugD => m_Wrapper.m_Gameplay_DebugD;
+        public InputAction @DebugU => m_Wrapper.m_Gameplay_DebugU;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -238,6 +330,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AltitudeDown.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeDown;
                 @AltitudeDown.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeDown;
                 @AltitudeDown.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeDown;
+                @DebugL.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugL;
+                @DebugL.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugL;
+                @DebugL.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugL;
+                @DebugR.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugR;
+                @DebugR.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugR;
+                @DebugR.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugR;
+                @DebugD.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugD;
+                @DebugD.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugD;
+                @DebugD.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugD;
+                @DebugU.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugU;
+                @DebugU.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugU;
+                @DebugU.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDebugU;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -257,6 +361,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AltitudeDown.started += instance.OnAltitudeDown;
                 @AltitudeDown.performed += instance.OnAltitudeDown;
                 @AltitudeDown.canceled += instance.OnAltitudeDown;
+                @DebugL.started += instance.OnDebugL;
+                @DebugL.performed += instance.OnDebugL;
+                @DebugL.canceled += instance.OnDebugL;
+                @DebugR.started += instance.OnDebugR;
+                @DebugR.performed += instance.OnDebugR;
+                @DebugR.canceled += instance.OnDebugR;
+                @DebugD.started += instance.OnDebugD;
+                @DebugD.performed += instance.OnDebugD;
+                @DebugD.canceled += instance.OnDebugD;
+                @DebugU.started += instance.OnDebugU;
+                @DebugU.performed += instance.OnDebugU;
+                @DebugU.canceled += instance.OnDebugU;
             }
         }
     }
@@ -268,5 +384,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnCameraLook(InputAction.CallbackContext context);
         void OnAltitudeUp(InputAction.CallbackContext context);
         void OnAltitudeDown(InputAction.CallbackContext context);
+        void OnDebugL(InputAction.CallbackContext context);
+        void OnDebugR(InputAction.CallbackContext context);
+        void OnDebugD(InputAction.CallbackContext context);
+        void OnDebugU(InputAction.CallbackContext context);
     }
 }
