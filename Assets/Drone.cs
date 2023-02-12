@@ -46,6 +46,7 @@ public class Drone : MonoBehaviour
         rb = GetComponentInChildren<Rigidbody>();
         uavGameobject = GameObject.Find("UAV");
         followGameobject = GameObject.Find("Follow Target");
+        Cursor.visible = false;
     }
 
     void OnEnable()
@@ -84,19 +85,20 @@ public class Drone : MonoBehaviour
         {
             move = Vector2.zero;
         }
-        Vector3 m = new Vector3(move.x, altitudeStick, move.y) * Time.deltaTime * moveFactor;
-        float speed = m.magnitude;
+        Vector3 horizontalMovement = new Vector3(move.x, 0, move.y) * Time.deltaTime * moveFactor;
+        Vector3 speedVector = new Vector3(move.x, altitudeStick, move.y) * Time.deltaTime * moveFactor;
+        float speed = speedVector.magnitude;
         // transform relative to the camera x and y
-        Vector3 mcam = Camera.main.transform.TransformDirection(m);
+        Vector3 mcam = Camera.main.transform.TransformDirection(horizontalMovement);
         // scale the magnitude of the movement to the speed
-        mcam.y = m.y;
+        mcam.y = altitudeStick * Time.deltaTime * moveFactor;
         mcam = mcam.normalized * droneSpeed;
         // transform.Translate(mcam, Space.World);
         rb.AddForce(mcam * speed);
         if (move.magnitude > 0.1f)
         {
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(mcam.x, mcam.y, mcam.z), Vector3.up);
-            newRotation = Quaternion.Euler(newRotation.eulerAngles.x + 20, newRotation.eulerAngles.y, newRotation.eulerAngles.z);
+            newRotation = Quaternion.Euler(newRotation.eulerAngles.x + 25, newRotation.eulerAngles.y, newRotation.eulerAngles.z);
             uavGameobject.transform.rotation = Quaternion.Lerp(uavGameobject.transform.rotation, newRotation, Time.deltaTime * 10);
         }
         else
