@@ -46,10 +46,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Altitude"",
+                    ""name"": ""CameraLook"",
                     ""type"": ""PassThrough"",
                     ""id"": ""a4f71443-5a30-4728-872d-9af94ffef057"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AltitudeUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f742642-5efc-4353-8d92-d9379d4f8f7f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AltitudeDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ace9e9f-d5bf-43f7-8d48-af287fb3033e"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -85,7 +103,29 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Altitude"",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11fe04be-36f5-4406-8bfe-8bd24894cc90"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltitudeUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4a83611-a187-4c14-a134-c3cd040ba749"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltitudeDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -98,7 +138,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_Altitude = m_Gameplay.FindAction("Altitude", throwIfNotFound: true);
+        m_Gameplay_CameraLook = m_Gameplay.FindAction("CameraLook", throwIfNotFound: true);
+        m_Gameplay_AltitudeUp = m_Gameplay.FindAction("AltitudeUp", throwIfNotFound: true);
+        m_Gameplay_AltitudeDown = m_Gameplay.FindAction("AltitudeDown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,14 +202,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_Altitude;
+    private readonly InputAction m_Gameplay_CameraLook;
+    private readonly InputAction m_Gameplay_AltitudeUp;
+    private readonly InputAction m_Gameplay_AltitudeDown;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @Altitude => m_Wrapper.m_Gameplay_Altitude;
+        public InputAction @CameraLook => m_Wrapper.m_Gameplay_CameraLook;
+        public InputAction @AltitudeUp => m_Wrapper.m_Gameplay_AltitudeUp;
+        public InputAction @AltitudeDown => m_Wrapper.m_Gameplay_AltitudeDown;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -183,9 +229,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Altitude.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitude;
-                @Altitude.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitude;
-                @Altitude.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitude;
+                @CameraLook.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLook;
+                @CameraLook.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLook;
+                @CameraLook.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLook;
+                @AltitudeUp.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeUp;
+                @AltitudeUp.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeUp;
+                @AltitudeUp.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeUp;
+                @AltitudeDown.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeDown;
+                @AltitudeDown.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeDown;
+                @AltitudeDown.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAltitudeDown;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -196,9 +248,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Altitude.started += instance.OnAltitude;
-                @Altitude.performed += instance.OnAltitude;
-                @Altitude.canceled += instance.OnAltitude;
+                @CameraLook.started += instance.OnCameraLook;
+                @CameraLook.performed += instance.OnCameraLook;
+                @CameraLook.canceled += instance.OnCameraLook;
+                @AltitudeUp.started += instance.OnAltitudeUp;
+                @AltitudeUp.performed += instance.OnAltitudeUp;
+                @AltitudeUp.canceled += instance.OnAltitudeUp;
+                @AltitudeDown.started += instance.OnAltitudeDown;
+                @AltitudeDown.performed += instance.OnAltitudeDown;
+                @AltitudeDown.canceled += instance.OnAltitudeDown;
             }
         }
     }
@@ -207,6 +265,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnAltitude(InputAction.CallbackContext context);
+        void OnCameraLook(InputAction.CallbackContext context);
+        void OnAltitudeUp(InputAction.CallbackContext context);
+        void OnAltitudeDown(InputAction.CallbackContext context);
     }
 }
