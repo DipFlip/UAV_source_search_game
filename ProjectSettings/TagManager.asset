@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Source
   - CinemachineTarget
+  - Prop
   layers:
   - Default
   - TransparentFX
