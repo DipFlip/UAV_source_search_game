@@ -10,7 +10,8 @@ public class Drone : MonoBehaviour
     Vector2 move;
     float altitudeStick;
     private Vector2 cameraLook;
-    public GameObject source;
+    // public GameObject source;
+    public SourceDetector sourceDetector;
     private GameObject uavGameobject;
     private GameObject followGameobject;
     private Rigidbody rb;
@@ -72,12 +73,19 @@ public class Drone : MonoBehaviour
 
     private void UpdateLightColor()
     {
-        float distanceToSource = Vector3.Distance(uavGameobject.transform.position, source.transform.position);
-        // create a color between red and green based on distance to source
-        Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 10);
-        // set the color of the light
-        detectionLight.color = c;
+        GameObject closestSource = sourceDetector.GetClosestSource();
+
+        if (closestSource != null)
+        {
+            float distanceToSource = Vector3.Distance(uavGameobject.transform.position, closestSource.transform.position);
+            Debug.Log(distanceToSource);
+            // create a color between red and green based on distance to source
+            Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 10);
+            // set the color of the light
+            detectionLight.color = c;
+        }
     }
+
 
     private void Movement()
     {
