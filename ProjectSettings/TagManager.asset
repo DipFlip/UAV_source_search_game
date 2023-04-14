@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Source
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - Water
   - UI
   - Roads
-  - 
-  - 
+  - Player
+  - Car
   - 
   - 
   - 
