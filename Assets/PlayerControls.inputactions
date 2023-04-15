@@ -6,7 +6,7 @@
             "id": "4194e79f-591d-4494-b9cc-d2ca5da15252",
             "actions": [
                 {
-                    "name": "Jump",
+                    "name": "Flag",
                     "type": "Button",
                     "id": "c697e5ed-0973-400a-940c-574794b94be8",
                     "expectedControlType": "Button",
@@ -95,7 +95,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Flag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -123,34 +123,12 @@
                 },
                 {
                     "name": "",
-                    "id": "11fe04be-36f5-4406-8bfe-8bd24894cc90",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AltitudeUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8cc12780-dc11-4b3e-abcb-629ea017d802",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "AltitudeUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c4a83611-a187-4c14-a134-c3cd040ba749",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AltitudeDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

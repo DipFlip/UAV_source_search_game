@@ -19,6 +19,7 @@ public class Drone : MonoBehaviour
     [SerializeField] private Light detectionLight;
     [SerializeField] private float droneSpeed = 100f;
     [SerializeField] private float camSensitivity = 0.5f;
+    [SerializeField] private PrefabSpawner spawner;
     void Awake()
     {
         controls = new PlayerControls();
@@ -32,6 +33,7 @@ public class Drone : MonoBehaviour
 
         controls.Gameplay.AltitudeUp.canceled += ctx => altitudeStick = 0;
         controls.Gameplay.AltitudeDown.canceled += ctx => altitudeStick = 0;
+        controls.Gameplay.Flag.performed += ctx => spawner.SpawnPrefabClosest();
     }
 
     private void SetCameraLookWithConstraints(Vector2 cameraStick)
@@ -80,7 +82,8 @@ public class Drone : MonoBehaviour
             float distanceToSource = Vector3.Distance(uavGameobject.transform.position, closestSource.transform.position);
             Debug.Log(distanceToSource);
             // create a color between red and green based on distance to source
-            Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 10);
+
+            Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 25);
             // set the color of the light
             detectionLight.color = c;
         }

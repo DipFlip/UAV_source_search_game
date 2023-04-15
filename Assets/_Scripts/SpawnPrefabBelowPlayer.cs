@@ -7,12 +7,7 @@ public class SpawnPrefabBelowPlayer : MonoBehaviour
     public GameObject prefabToSpawn;
     public LayerMask groundLayers;
     public float maxRaycastDistance = 100f;
-    private int carLayer;
-    private void Start()
-    {
-        carLayer = LayerMask.NameToLayer("Car");
-    }
-
+    private string carTag = "Car";
 
     public void SpawnPrefab()
     {
@@ -22,7 +17,7 @@ public class SpawnPrefabBelowPlayer : MonoBehaviour
             Vector3 spawnPosition = hit.point;
             GameObject spawnedPrefab = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
             
-            if (hit.collider.gameObject.layer == carLayer)
+            if (hit.collider.gameObject.CompareTag(carTag))
             {
                 spawnedPrefab.transform.SetParent(hit.collider.transform);
             }
@@ -33,7 +28,6 @@ public class SpawnPrefabBelowPlayer : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
@@ -41,7 +35,4 @@ public class SpawnPrefabBelowPlayer : MonoBehaviour
             SpawnPrefab();
         }
     }
-
-
 }
-
