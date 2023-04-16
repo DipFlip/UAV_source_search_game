@@ -8,5 +8,11 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 5bb28f52721780f4bb05048a0741b55a
+  - enabled: 1
+    path: Assets/Scenes/SourceCityScene.unity
+    guid: efd27bfa39bcaf848b0591e6da757201
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9fc2166ef75fc89459c50e3a0f8f3e28, type: 2}
