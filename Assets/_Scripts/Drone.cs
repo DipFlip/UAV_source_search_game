@@ -15,7 +15,8 @@ public class Drone : MonoBehaviour
     private GameObject uavGameobject;
     private GameObject followGameobject;
     private Rigidbody rb;
-
+    public AudioSource audioSource;
+    private float tweenPitch = 1f;
     [SerializeField] private Light detectionLight;
     [SerializeField] private float droneSpeed = 100f;
     [SerializeField] private float camSensitivity = 0.5f;
@@ -117,5 +118,8 @@ public class Drone : MonoBehaviour
             Quaternion newRotation = Quaternion.Euler(0, uavGameobject.transform.rotation.eulerAngles.y, 0);
             uavGameobject.transform.rotation = Quaternion.Lerp(uavGameobject.transform.rotation, newRotation, Time.deltaTime * 10);
         }
+        // change sound pitch based on speed
+        tweenPitch = Mathf.Lerp(tweenPitch, 1f + speed * 1.2f, 0.05f);
+        audioSource.pitch = tweenPitch;
     }
 }
