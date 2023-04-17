@@ -25,6 +25,10 @@ public class SourceDetector : MonoBehaviour
             sourcesInRange.Remove(other.gameObject);
         }
     }
+    public void RemoveSource(GameObject source)
+    {
+        sourcesInRange.Remove(source);
+    }
 
     public GameObject GetClosestSource()
     {

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        Cursor.visible = false;
         timeRemaining = startTime;
         isGameOver = false;
         StartCoroutine(Countdown());
@@ -73,12 +74,17 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         endScreen.SetActive(true);
-        finalScoreText.text = "Final Score: " + score;
+        Cursor.visible = true;
+        finalScoreText.text = "You found " + score + " sources!";
         // Disable user input here, depending on your game's mechanics
     }
 
     public void RestartGame()
     {
         SceneLoader.Instance.LoadGameScene();
+    }
+    public void MainMenu()
+    {
+        SceneLoader.Instance.LoadMainMenu();
     }
 }

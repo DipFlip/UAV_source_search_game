@@ -62,6 +62,10 @@ public class PrefabSpawner : MonoBehaviour
                 prefabToSpawn = prefabToSpawnGood;
                 GameManager.Instance.AddScore(1);
                 spawnPosition = closestSource.transform.position;
+                //change closest source tag to FoundSource
+                closestSource.tag = "FoundSource";
+                //remove from list of sources
+                sourceDetector.RemoveSource(closestSource);
             }
             else
             {
@@ -70,8 +74,8 @@ public class PrefabSpawner : MonoBehaviour
             }
 
             // Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-            GameObject go = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
-            go.transform.DOMove(spawnPosition, 1f).SetEase(Ease.OutBounce);
+            GameObject spawnedObject = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
+            spawnedObject.transform.DOMove(spawnPosition, 1f).SetEase(Ease.OutBounce);
 
 
         }

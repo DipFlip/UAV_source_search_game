@@ -8,6 +8,7 @@ TagManager:
   - CinemachineTarget
   - Prop
   - Car
+  - FoundSource
   layers:
   - Default
   - TransparentFX

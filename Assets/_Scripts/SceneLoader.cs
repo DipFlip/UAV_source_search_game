@@ -22,11 +22,13 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        Debug.Log("Loading main menu...");
         SceneManager.LoadScene(0);
     }
 
     public void LoadGameScene()
     {
+        Debug.Log("Loading game scene...");
         SceneManager.LoadScene(1);
     }
 }
