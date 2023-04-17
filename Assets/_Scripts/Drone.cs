@@ -80,7 +80,6 @@ public class Drone : MonoBehaviour
         if (closestSource != null)
         {
             float distanceToSource = Vector3.Distance(uavGameobject.transform.position, closestSource.transform.position);
-            Debug.Log(distanceToSource);
             // create a color between red and green based on distance to source
 
             Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 25);

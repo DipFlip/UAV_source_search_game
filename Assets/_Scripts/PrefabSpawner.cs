@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using DG.Tweening;
 public class PrefabSpawner : MonoBehaviour
 {
     public GameObject prefabToSpawnGood;
@@ -69,7 +69,11 @@ public class PrefabSpawner : MonoBehaviour
                 GameManager.Instance.SubtractScore(1);
             }
 
-            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+            // Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+            GameObject go = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
+            go.transform.DOMove(spawnPosition, 1f).SetEase(Ease.OutBounce);
+
+
         }
     }
 }
