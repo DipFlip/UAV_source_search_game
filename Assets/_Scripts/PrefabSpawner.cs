@@ -60,11 +60,13 @@ public class PrefabSpawner : MonoBehaviour
             if (closestSource != null && Vector3.Distance(dronePosition, closestSource.transform.position) <= sourceDetectionDistance)
             {
                 prefabToSpawn = prefabToSpawnGood;
+                GameManager.Instance.AddScore(1);
                 spawnPosition = closestSource.transform.position;
             }
             else
             {
                 prefabToSpawn = prefabToSpawnBad;
+                GameManager.Instance.SubtractScore(1);
             }
 
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
