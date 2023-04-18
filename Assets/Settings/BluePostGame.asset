@@ -15,13 +15,13 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.23
+    m_Value: 1.16
   intensity:
     m_OverrideState: 1
-    m_Value: 0.74
+    m_Value: 53.44
   scatter:
     m_OverrideState: 0
-    m_Value: 0.7
+    m_Value: 0.517
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   master:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       <length>k__BackingField: 2
       m_Loop: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
-          outSlope: 1
+          inSlope: 0.7106474
+          outSlope: 0.7106474
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -104,8 +104,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
-          outSlope: 1
+          inSlope: 0.44596744
+          outSlope: 0.44596744
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -312,8 +312,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   gaussianEnd:
-    m_OverrideState: 0
-    m_Value: 182
+    m_OverrideState: 1
+    m_Value: 0
   gaussianMaxRadius:
     m_OverrideState: 0
     m_Value: 0.715

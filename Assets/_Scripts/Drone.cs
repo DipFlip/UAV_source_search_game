@@ -18,7 +18,8 @@ public class Drone : MonoBehaviour
     private Rigidbody rb;
     public AudioSource audioSource;
     private float tweenPitch = 1f;
-    [SerializeField] private Light detectionLight;
+    // [SerializeField] private Light detectionLight;
+    [SerializeField] private Material detectionMaterial;
     [SerializeField] private float droneSpeed = 100f;
     [SerializeField] private float camSensitivity = 0.5f;
     [SerializeField] private PrefabSpawner spawner;
@@ -87,10 +88,14 @@ public class Drone : MonoBehaviour
             float distanceToSource = Vector3.Distance(uavGameobject.transform.position, closestSource.transform.position);
             geigerCounter.distanceToSource = distanceToSource;
             // create a color between red and green based on distance to source
+            distanceToSource -= 7f;
+            if (distanceToSource < 0) distanceToSource = 0;
 
-            Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 25);
-            // set the color of the light
-            detectionLight.color = c;
+            Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 20);
+            detectionMaterial.SetColor("_BaseColor", c);
+            //Make HDR version of color with high intensity
+            c = c * 5;
+            detectionMaterial.SetColor("_EmissionColor", c);
         }
     }
 
