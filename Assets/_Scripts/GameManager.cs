@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         controls.Gameplay.Disable();
         endScreen.SetActive(true);
         Cursor.visible = true;
-        finalScoreText.text = "You found " + score + " sources!";
+        finalScoreText.text = "Final score " + score + " points!";
         postProcessChanger.ChangePostProcessData();
         // Disable user input here, depending on your game's mechanics
     }
