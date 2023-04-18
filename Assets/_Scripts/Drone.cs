@@ -22,6 +22,7 @@ public class Drone : MonoBehaviour
     [SerializeField] private float droneSpeed = 100f;
     [SerializeField] private float camSensitivity = 0.5f;
     [SerializeField] private PrefabSpawner spawner;
+    [SerializeField] private GeigerCounter geigerCounter;
     
     void Awake()
     {
@@ -84,6 +85,7 @@ public class Drone : MonoBehaviour
         if (closestSource != null)
         {
             float distanceToSource = Vector3.Distance(uavGameobject.transform.position, closestSource.transform.position);
+            geigerCounter.distanceToSource = distanceToSource;
             // create a color between red and green based on distance to source
 
             Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 25);
