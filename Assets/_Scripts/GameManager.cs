@@ -89,10 +89,10 @@ public class GameManager : MonoBehaviour
         // Disable user input here, depending on your game's mechanics
     }
 
-    public void RestartGame()
-    {
-        SceneLoader.Instance.LoadGameScene();
-    }
+    // public void RestartGame()
+    // {
+    //     SceneLoader.Instance.LoadGameScene();
+    // }
     public void MainMenu()
     {
         SceneLoader.Instance.LoadMainMenu();

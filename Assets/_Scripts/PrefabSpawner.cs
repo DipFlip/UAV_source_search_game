@@ -31,6 +31,7 @@ public class PrefabSpawner : MonoBehaviour
             spawnPosition = straightDownHit.point;
 
         }
+        RaycastHit hit = new RaycastHit();
         for (int i = 0; i < numberOfRays; i++)
         {
             float horizontalAngle = i * 360f / numberOfRays;
@@ -42,7 +43,6 @@ public class PrefabSpawner : MonoBehaviour
                 Quaternion rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
                 Vector3 direction = rotation * Vector3.forward;
 
-                RaycastHit hit;
                 if (Physics.Raycast(dronePosition, direction, out hit, raycastDistance, flagableLayers))
                 {
                     if (hit.distance < closestHitDistance)
@@ -79,9 +79,17 @@ public class PrefabSpawner : MonoBehaviour
 
             // Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
             GameObject spawnedObject = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
-            spawnedObject.transform.DOMove(spawnPosition, 1f).SetEase(Ease.OutBounce);
-
-
+            spawnedObject.transform.DOMove(spawnPosition, 1f)
+                .SetEase(Ease.OutBounce)
+                .OnComplete(() =>
+                {
+                    // if parent of source has tag Car, set parent of spawnedObject to parent of source
+                    if (closestSource != null && closestSource.transform.parent != null && closestSource.transform.parent.CompareTag("Car"))
+                    {
+                        spawnedObject.transform.SetParent(closestSource.transform.parent);
+                        spawnedObject.transform.position = new Vector3(closestSource.transform.position.x, closestSource.transform.position.y+1, closestSource.transform.position.z);
+                    }
+                });
         }
     }
 }

@@ -86,16 +86,22 @@ public class Drone : MonoBehaviour
         if (closestSource != null)
         {
             float distanceToSource = Vector3.Distance(uavGameobject.transform.position, closestSource.transform.position);
-            geigerCounter.distanceToSource = distanceToSource;
             // create a color between red and green based on distance to source
             distanceToSource -= 7f;
             if (distanceToSource < 0) distanceToSource = 0;
+            geigerCounter.distanceToSource = distanceToSource;
 
-            Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 20);
+            Color c = Color.Lerp(Color.red, Color.green, distanceToSource / 13);
             detectionMaterial.SetColor("_BaseColor", c);
             //Make HDR version of color with high intensity
-            c = c * 5;
+            c = c * 2;
             detectionMaterial.SetColor("_EmissionColor", c);
+        }
+        else
+        {
+            detectionMaterial.SetColor("_BaseColor", Color.green);
+            detectionMaterial.SetColor("_EmissionColor", Color.green);
+            geigerCounter.distanceToSource = 25f;
         }
     }
 

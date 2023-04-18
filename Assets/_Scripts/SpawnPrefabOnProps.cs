@@ -4,6 +4,7 @@ using UnityEngine;
 public class SpawnPrefabOnProps : MonoBehaviour
 {
     public GameObject prefabToSpawn;
+    public string tagString = "Prop";
     public int minSpawns = 1;
     public int maxSpawns = 5;
 
@@ -14,7 +15,7 @@ public class SpawnPrefabOnProps : MonoBehaviour
 
     public void SpawnPrefabOnRandomProps()
     {
-        GameObject[] props = GameObject.FindGameObjectsWithTag("Prop");
+        GameObject[] props = GameObject.FindGameObjectsWithTag(tagString);
         int totalSpawns = Random.Range(minSpawns, maxSpawns + 1);
 
         if (totalSpawns > props.Length)

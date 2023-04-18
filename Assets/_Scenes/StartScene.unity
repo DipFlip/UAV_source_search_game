@@ -195,10 +195,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 1, g: 0.7041319, b: 0.41037738, a: 1}
-    topRight: {r: 1, g: 0.7041319, b: 0.41037738, a: 1}
-    bottomLeft: {r: 1, g: 0.58672583, b: 0.41176474, a: 1}
-    bottomRight: {r: 1, g: 0.58672583, b: 0.41176474, a: 1}
+    topLeft: {r: 0.99215686, g: 0.8, b: 0.011764706, a: 1}
+    topRight: {r: 0.99215686, g: 0.8, b: 0.011764706, a: 1}
+    bottomLeft: {r: 1, g: 0.6902984, b: 0.15566039, a: 1}
+    bottomRight: {r: 1, g: 0.6902984, b: 0.15566039, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -118, y: 78}
+  m_AnchoredPosition: {x: -118, y: 110}
   m_SizeDelta: {x: 205.17, y: 43.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &37968326
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DRONE SEARCH CITY
+  m_text: RADIATION CITY SIMULATOR 2023
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e40a0e35a35f5ee4abca671d0aa95450, type: 2}
   m_sharedMaterial: {fileID: 3348538618184749466, guid: e40a0e35a35f5ee4abca671d0aa95450, type: 2}
@@ -330,8 +330,8 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 0.7498502, g: 1, b: 0.4198113, a: 1}
-    topRight: {r: 0.82253915, g: 1, b: 0.504717, a: 1}
+    topLeft: {r: 0.99215686, g: 0.8, b: 0.011764706, a: 1}
+    topRight: {r: 0.99215686, g: 0.8, b: 0.011764706, a: 1}
     bottomLeft: {r: 1, g: 0.658507, b: 0.25, a: 1}
     bottomRight: {r: 1, g: 0.62042516, b: 0.3160377, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
@@ -343,8 +343,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1045,19 +1045,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.02
+      value: -8.73
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.02
+      value: -1.53
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.56
+      value: 5.67
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9409009
+      value: -0.73743004
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1065,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.3386819
+      value: -0.67542356
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1077,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -39.593
+      value: -275.026
       objectReference: {fileID: 0}
     - target: {fileID: 6839019126603095312, guid: aa56c8756a99b3a4a93d76c6c7e6e02b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
