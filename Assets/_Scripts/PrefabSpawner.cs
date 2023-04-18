@@ -4,6 +4,8 @@ public class PrefabSpawner : MonoBehaviour
 {
     public GameObject prefabToSpawnGood;
     public GameObject prefabToSpawnBad;
+    public GameObject prefabScorePlus;
+    public GameObject prefabScoreMinus;
     public LayerMask flagableLayers;
     public int numberOfRays = 12;
     public float raycastDistance = 10f;
@@ -61,6 +63,7 @@ public class PrefabSpawner : MonoBehaviour
             {
                 prefabToSpawn = prefabToSpawnGood;
                 GameManager.Instance.AddScore(1);
+                Instantiate(prefabScorePlus, transform.position, Quaternion.identity);
                 spawnPosition = closestSource.transform.position;
                 //change closest source tag to FoundSource
                 closestSource.tag = "FoundSource";
@@ -70,6 +73,7 @@ public class PrefabSpawner : MonoBehaviour
             else
             {
                 prefabToSpawn = prefabToSpawnBad;
+                Instantiate(prefabScoreMinus, transform.position, Quaternion.identity);
                 SoundManager.Instance.PlayWrongSound();
             }
 
