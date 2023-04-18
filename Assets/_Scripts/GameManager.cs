@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private float timeRemaining;
     private int score;
     private bool isGameOver;
+    [SerializeField] PostProcessChanger postProcessChanger;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        postProcessChanger.ResetPostProcessData();
         Cursor.visible = false;
         timeRemaining = startTime;
         isGameOver = false;
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameOver)
         {
+            SoundManager.Instance.PlayScoreSound();
             score += points;
         }
         updateScoreText();
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameOver)
         {
+            SoundManager.Instance.PlayWrongSound();
             score -= points;
             if (score < 0)
             {
@@ -76,6 +80,7 @@ public class GameManager : MonoBehaviour
         endScreen.SetActive(true);
         Cursor.visible = true;
         finalScoreText.text = "You found " + score + " sources!";
+        postProcessChanger.ChangePostProcessData();
         // Disable user input here, depending on your game's mechanics
     }
 

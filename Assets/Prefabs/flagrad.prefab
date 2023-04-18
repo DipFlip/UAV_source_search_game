@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2833524453184434551}
-  - component: {fileID: 6022269375621736308}
+  - component: {fileID: 2720384040064789676}
   m_Layer: 0
   m_Name: flagrad
   m_TagString: Untagged
@@ -118,7 +118,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6022269375621736308
+--- !u!114 &2720384040064789676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3177680785624837069}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823d077420c75934c93cde27ff972121, type: 3}
+  m_Script: {fileID: 11500000, guid: 655144e9fcdf4e140ab6397b94688b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: be77d745a68626547abfdc9e6d69a4ba, type: 3}
