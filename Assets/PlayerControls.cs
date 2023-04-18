@@ -353,6 +353,107 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""52309e1f-834e-4d60-a618-d7449b866ba8"",
+            ""actions"": [
+                {
+                    ""name"": ""OptionUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""090123b2-a834-4002-b9d5-b824a56eda79"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OptionDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""e48325cc-a6e6-42f0-a92e-172e001d846c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1a6a869-0fdd-4224-860b-1d35d5fdfc6a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""96cf3a40-c224-4cfc-929b-5da599f79eb6"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""OptionUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd4ae048-ea19-4a75-9a13-a2477af574ad"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""OptionUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6286d976-a747-4fb6-8b0a-6af5738ad5a7"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""OptionDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2bb7c09-06a5-43aa-800c-2a9a025843da"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""OptionDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c76ade7-9cf6-485d-b1ce-a40c1b562bc8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c216de28-43ec-4f4b-ac54-23f0edd64806"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -396,6 +497,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_DebugR = m_Gameplay.FindAction("DebugR", throwIfNotFound: true);
         m_Gameplay_DebugD = m_Gameplay.FindAction("DebugD", throwIfNotFound: true);
         m_Gameplay_DebugU = m_Gameplay.FindAction("DebugU", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_OptionUp = m_UI.FindAction("OptionUp", throwIfNotFound: true);
+        m_UI_OptionDown = m_UI.FindAction("OptionDown", throwIfNotFound: true);
+        m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -548,6 +654,55 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_OptionUp;
+    private readonly InputAction m_UI_OptionDown;
+    private readonly InputAction m_UI_Select;
+    public struct UIActions
+    {
+        private @PlayerControls m_Wrapper;
+        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OptionUp => m_Wrapper.m_UI_OptionUp;
+        public InputAction @OptionDown => m_Wrapper.m_UI_OptionDown;
+        public InputAction @Select => m_Wrapper.m_UI_Select;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @OptionUp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionUp;
+                @OptionUp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionUp;
+                @OptionUp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionUp;
+                @OptionDown.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionDown;
+                @OptionDown.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionDown;
+                @OptionDown.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionDown;
+                @Select.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OptionUp.started += instance.OnOptionUp;
+                @OptionUp.performed += instance.OnOptionUp;
+                @OptionUp.canceled += instance.OnOptionUp;
+                @OptionDown.started += instance.OnOptionDown;
+                @OptionDown.performed += instance.OnOptionDown;
+                @OptionDown.canceled += instance.OnOptionDown;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_ControllerSchemeIndex = -1;
     public InputControlScheme ControllerScheme
     {
@@ -577,5 +732,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDebugR(InputAction.CallbackContext context);
         void OnDebugD(InputAction.CallbackContext context);
         void OnDebugU(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnOptionUp(InputAction.CallbackContext context);
+        void OnOptionDown(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(100)]
 public class Drone : MonoBehaviour
 {
     PlayerControls controls;
@@ -21,9 +22,11 @@ public class Drone : MonoBehaviour
     [SerializeField] private float droneSpeed = 100f;
     [SerializeField] private float camSensitivity = 0.5f;
     [SerializeField] private PrefabSpawner spawner;
+    
     void Awake()
     {
-        controls = new PlayerControls();
+        // controls = new PlayerControls();
+        controls = GameManager.Instance.controls;
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;
         controls.Gameplay.AltitudeUp.performed += ctx => altitudeStick = 1f;

@@ -1,10 +1,12 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public PlayerControls controls;
     public float startTime = 60f;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI scoreText;
@@ -16,11 +18,13 @@ public class GameManager : MonoBehaviour
     private bool isGameOver;
     [SerializeField] PostProcessChanger postProcessChanger;
 
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            controls = new PlayerControls();
         }
     }
     private void Start()
@@ -77,6 +81,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         isGameOver = true;
+        controls.Gameplay.Disable();
         endScreen.SetActive(true);
         Cursor.visible = true;
         finalScoreText.text = "You found " + score + " sources!";
