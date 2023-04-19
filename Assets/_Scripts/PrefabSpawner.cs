@@ -74,7 +74,7 @@ public class PrefabSpawner : MonoBehaviour
             {
                 prefabToSpawn = prefabToSpawnBad;
                 Instantiate(prefabScoreMinus, transform.position, Quaternion.identity);
-                SoundManager.Instance.PlayWrongSound();
+                GameManager.Instance.SubtractScore(1);
             }
 
             // Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
