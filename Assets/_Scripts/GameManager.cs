@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject endScreen;
     public TextMeshProUGUI finalScoreText;
+   
+    public int highestScore { get; private set; }
 
     private float timeRemaining;
     private int score;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        highestScore = PlayerPrefs.GetInt("Highscore", 0);
         postProcessChanger.ResetPostProcessData();
         Cursor.visible = false;
         timeRemaining = startTime;
@@ -78,6 +81,11 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Score: " + score;
     }
+    public void ResetHighscore()
+    {
+        PlayerPrefs.SetInt("Highscore", 0);
+        highestScore = 0;
+    }
     private void GameOver()
     {
         isGameOver = true;
@@ -86,6 +94,15 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         finalScoreText.text = "Final score " + score + " points!";
         postProcessChanger.ChangePostProcessData();
+        if (score > highestScore)
+        {
+            PlayerPrefs.SetInt("Highscore", score);
+            highestScore = score;
+        }
+        if (HighscoreManager.Instance.loggedIn)
+        {
+            HighscoreManager.Instance.SubmitHighscore(score);
+        }
         // Disable user input here, depending on your game's mechanics
     }
 
