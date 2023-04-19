@@ -124,6 +124,10 @@ public class HighscoreManager : MonoBehaviour
         Debug.Log($"Welcome, {result.DisplayName}!");
         SubmitHighscore(GameManager.Instance.highestScore);
         loggedIn = true;
+        usernameInputField.gameObject.SetActive(false);
+        registerButton.SetActive(false);
+        logoutButton.SetActive(true);
+
     }
 
     public void SubmitHighscore(int score)
