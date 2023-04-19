@@ -19,4 +19,8 @@ public class SceneChangeButton : MonoBehaviour
     {
         SceneLoader.Instance.LoadMainMenu();
     }
+    public void QuitGame()
+    {
+        SceneLoader.Instance.QuitGame();
+    }
 }

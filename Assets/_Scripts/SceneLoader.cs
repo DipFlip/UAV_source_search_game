@@ -31,4 +31,9 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("Loading game scene...");
         SceneManager.LoadScene(1);
     }
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
+    }
 }
