@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         timeRemaining = startTime;
         isGameOver = false;
         StartCoroutine(Countdown());
+        SoundManager.Instance.UnmuteAll();
     }
 
     private IEnumerator Countdown()
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         finalScoreText.text = "Final score " + score + " points!";
         postProcessChanger.ChangePostProcessData();
+        SoundManager.Instance.MuteAll();
         if (score > highestScore)
         {
             PlayerPrefs.SetInt("Highscore", score);

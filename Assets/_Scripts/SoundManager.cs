@@ -6,7 +6,9 @@ public class SoundManager : MonoBehaviour
 {
     // Declare the audio sources and clips
     public AudioSource audioSourceEffects;
+    private float effectsVolume = 0.845f;
     public AudioSource audioSourceMusic;
+    public AudioSource audioSourceGeigerCounter;
     public AudioClip scoreSound;
     public AudioClip wrongSound;
     public AudioClip backgroundMusic;
@@ -52,6 +54,19 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(PlaySoundDelayedEnum(clip, delay));
     }
 
+    public void MuteAll()
+    {
+        audioSourceEffects.volume = 0;
+        audioSourceGeigerCounter.volume = 0;
+        // audioSourceMusic.volume = 0;
+    }
+
+    public void UnmuteAll()
+    {
+        audioSourceEffects.volume = effectsVolume;
+        audioSourceGeigerCounter.volume = 1;
+        // audioSourceMusic.volume = 1;
+    }
     private void PlayBackgroundMusic()
     {
         audioSourceMusic.clip = backgroundMusic;

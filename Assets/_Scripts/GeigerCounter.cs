@@ -11,18 +11,18 @@ public class GeigerCounter : MonoBehaviour
 
     public float distanceToSource;
 
-    private AudioSource audioSource;
+    // private AudioSource audioSource;
     private float timeSinceLastPlay;
     private float nextPlayInterval;
 
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            Debug.LogError("GeigerCounter requires an AudioSource component.");
-        }
-    }
+    // private void Awake()
+    // {
+    //     audioSource = GetComponent<AudioSource>();
+    //     if (audioSource == null)
+    //     {
+    //         Debug.LogError("GeigerCounter requires an AudioSource component.");
+    //     }
+    // }
 
     private void Start()
     {
@@ -31,16 +31,14 @@ public class GeigerCounter : MonoBehaviour
 
     private void Update()
     {
-        if (audioSource != null)
-        {
-            timeSinceLastPlay += Time.deltaTime;
+        timeSinceLastPlay += Time.deltaTime;
 
-            if (timeSinceLastPlay >= nextPlayInterval)
-            {
-                audioSource.PlayOneShot(geigerSound);
-                timeSinceLastPlay = 0;
-                UpdateNextPlayInterval();
-            }
+        if (timeSinceLastPlay >= nextPlayInterval)
+        {
+            SoundManager.Instance.audioSourceGeigerCounter.PlayOneShot(geigerSound);
+            // audioSource.PlayOneShot(geigerSound);
+            timeSinceLastPlay = 0;
+            UpdateNextPlayInterval();
         }
     }
 

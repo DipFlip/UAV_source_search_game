@@ -16,7 +16,8 @@ public class HighscoreManager : MonoBehaviour
     public bool loggedIn { get; private set; }
 
     public static HighscoreManager Instance;
-    private string username;
+    private string username = string.Empty;
+    private string displayname;
 
     private void Awake()
     {
@@ -33,25 +34,25 @@ public class HighscoreManager : MonoBehaviour
     private void Start()
     {
         username = PlayerPrefs.GetString("Username", string.Empty);
-        if (!string.IsNullOrEmpty(username))
-        {
-            // usernameInputField.text = storedUsername;
-            Login();
-        }
+        Login();
     }
     public void Register()
     {
-        username = usernameInputField.text;
+        displayname = usernameInputField.text;
         if (string.IsNullOrEmpty(username))
         {
             Debug.LogError("Username cannot be empty.");
             return;
         }
-        Login();
+        UpdateDisplayName();
     }
 
     public void Login()
     {
+        if (string.IsNullOrEmpty(username))
+        {
+            username = GenerateRandomUsername();
+        }
         Debug.Log("Logging in as " + username + "...");
         var request = new LoginWithCustomIDRequest
         {
@@ -66,24 +67,35 @@ public class HighscoreManager : MonoBehaviour
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
     }
 
+    private string GenerateRandomUsername()
+    {
+        // Generate a random username and add two numbers at the end
+        string[] adjectives = { "Anonomous", "Awesome", "Cool", "Amazing", "Fantastic", "Incredible", "Magnificent", "Marvelous", "Spectacular", "Superb", "Tremendous", "Unbelievable", "Wondrous" };
+        string[] nouns = { "Bunny", "Cat", "Dog", "Lion", "Panda", "Penguin", "Rabbit", "Sheep", "Tiger", "Wolf" };
+        return adjectives[Random.Range(0, adjectives.Length)] + nouns[Random.Range(0, nouns.Length)] + Random.Range(0, 100);
+    }
+
     private void OnLoginSuccess(LoginResult result)
     {
         Debug.Log($"Logged in successfully!");
-        if (result == null || result.InfoResultPayload == null || result.InfoResultPayload.PlayerProfile == null || result.InfoResultPayload.PlayerProfile.DisplayName == null)
-        {
-            // This account was just created and doesn't have a display name yet
-            UpdateDisplayName();
-        }
-        else
-        {
-            Debug.Log($"Welcome, {result.InfoResultPayload.PlayerProfile.DisplayName}!");
-            // GetLeaderboard(0, maxResults, DisplayLeaderboard);
-        }
+        // if (result == null || result.InfoResultPayload == null || result.InfoResultPayload.PlayerProfile == null || result.InfoResultPayload.PlayerProfile.DisplayName == null)
+        // {
+        //     // This account was just created and doesn't have a display name yet
+        //     UpdateDisplayName();
+        // }
+        // else
+        // {
+        //     Debug.Log($"Welcome, {result.InfoResultPayload.PlayerProfile.DisplayName}!");
+        // }
+        GetLeaderboard(0, maxResults, DisplayLeaderboard);
         PlayerPrefs.SetString("Username", username);
-        usernameInputField.gameObject.SetActive(false);
-        registerButton.SetActive(false);
-        logoutButton.SetActive(true);
-        loggedIn = true;
+        if (!string.IsNullOrEmpty(displayname))
+        {
+            loggedIn = true;
+            usernameInputField.gameObject.SetActive(false);
+            registerButton.SetActive(false);
+            logoutButton.SetActive(true);
+        }
     }
 
     public void Logout()
@@ -94,13 +106,14 @@ public class HighscoreManager : MonoBehaviour
         logoutButton.SetActive(false);
         loggedIn = false;
         GameManager.Instance.ResetHighscore();
+        PlayerPrefs.DeleteKey("Username");
     }
 
     private void UpdateDisplayName()
     {
         var request = new UpdateUserTitleDisplayNameRequest
         {
-            DisplayName = username
+            DisplayName = displayname
         };
 
         PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnUpdateDisplayNameSuccess, OnError);
@@ -110,6 +123,7 @@ public class HighscoreManager : MonoBehaviour
     {
         Debug.Log($"Welcome, {result.DisplayName}!");
         SubmitHighscore(GameManager.Instance.highestScore);
+        loggedIn = true;
     }
 
     public void SubmitHighscore(int score)
