@@ -21,7 +21,7 @@ public class Drone : MonoBehaviour
     // [SerializeField] private Light detectionLight;
     [SerializeField] private Material detectionMaterial;
     [SerializeField] private float droneSpeed = 100f;
-    [SerializeField] private float camSensitivity = 0.5f;
+    [SerializeField] private float camSensitivity = 5f;
     [SerializeField] private PrefabSpawner spawner;
     [SerializeField] private GeigerCounter geigerCounter;
     
@@ -75,8 +75,8 @@ public class Drone : MonoBehaviour
     {
         UpdateLightColor();
 
-        followGameobject.transform.Rotate(0, cameraLook.x*camSensitivity, 0, Space.World);
-        followGameobject.transform.Rotate(-cameraLook.y*camSensitivity, 0, 0, Space.Self);
+        followGameobject.transform.Rotate(0, cameraLook.x*camSensitivity*Time.deltaTime, 0, Space.World);
+        followGameobject.transform.Rotate(-cameraLook.y*camSensitivity*Time.deltaTime, 0, 0, Space.Self);
     }
 
     private void UpdateLightColor()
