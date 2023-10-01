@@ -33,6 +33,7 @@ public class HighscoreManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.DeleteAll();
         username = PlayerPrefs.GetString("Username", string.Empty);
         Login();
     }

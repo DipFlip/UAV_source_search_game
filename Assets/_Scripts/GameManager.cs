@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         highestScore = PlayerPrefs.GetInt("Highscore", 0);
         postProcessChanger.ResetPostProcessData();
-        Cursor.visible = false;
+        Cursor.visible = true;
         timeRemaining = startTime;
         isGameOver = false;
         StartCoroutine(Countdown());
